@@ -38,9 +38,6 @@ setup.template:
   settings:
     index.number_of_shards: 1
 
-#setup.template.settings:
-#  index.number_of_shards: 1
-
 setup.kibana:
   host: "http://kibana:5601"
 
