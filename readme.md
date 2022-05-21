@@ -4,9 +4,9 @@ Projeto baseado no setup para Docker disponível em https://github.com/devianton
 
 ## Executando
 
-1. [Antes de executar](#prerequisitos)
-1. [Execução](#execucao)
-    * [Acessando o Kibana](#acessando-kibana)
+1. [Antes de executar](#antes-de-executar)
+1. [Execução](#execução)
+    * [Acessando o Kibana](#acessando-o-kibana)
 
 ## Antes de executar
 O arquivo .env contém as variáveis responsáveis por padronizar a instalação da Elastic Stack, são elas:
