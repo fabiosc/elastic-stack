@@ -42,7 +42,7 @@ Para acessar o Kibana, basta acessar no browser a URL http://localhost:5601, o u
 ## O arquivo filebeat.yml
 * O arquivo filebeat.yml é o responsável por configurar a sincronização entre dos dados de log da aplicação e a Elastic Stack.
 * Algumas configurações são relativas ao nome do índice no Elastic Search e seu template. Nesse exempo o nome do índice tem nome iniciado pela palavra "produtos". E pode ser alterado para o nome que achar mais conveniente para criação dos índice e seu template.
-* OBSERVAÇÃO: A configuração do arquivo de log deve seguir o modelo em json seguido pelo Logstash para que os dados coletados sejam exibidos corretamente no Kibana
+* **OBSERVAÇÃO**: A configuração do arquivo de log deve seguir o modelo em json seguido pelo Logstash para que os dados coletados sejam exibidos corretamente no Kibana
 
 ## Criar visualização de dados no Kibana
 * Para criar a visualização de dados no Kibana é necessário acessar o menu, buscar e seguir os cliques nas opções Management > Stack Management > Kibana > Data Views
