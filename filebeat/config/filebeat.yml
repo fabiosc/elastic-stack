@@ -1,0 +1,52 @@
+## Filebeat configuration
+## https://github.com/elastic/beats/blob/master/deploy/docker/filebeat.docker.yml
+#
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    enconding: utf-8
+    paths:
+      - '/usr/share/filebeat/logs/*'  # Make sure to provide the absolute path of the file
+    json.keys_under_root: true
+    json.add_error_key: true
+    json.message_key: message
+    json.overwrite_keys: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+processors:
+  - truncate_fields:
+      fields:
+        - message
+      max_characters: 10240
+      fail_on_error: false
+      ignore_missing: true        
+
+output.elasticsearch:
+  hosts: ['http://elasticsearch:9200']
+  username: elastic
+  password: ${ELASTIC_PASSWORD}
+  index: "produtos-%{+yyyy.MM.dd}"
+
+setup.template:
+  name: 'produtos'
+  pattern: 'produtos-*'
+  enabled: false
+  settings:
+    index.number_of_shards: 1
+
+#setup.template.settings:
+#  index.number_of_shards: 1
+
+setup.kibana:
+  host: "http://kibana:5601"
+
+## HTTP endpoint for health checking
+## https://www.elastic.co/guide/en/beats/filebeat/current/http-endpoint.html
+#
+
+http.enabled: true
+http.host: 0.0.0.0
