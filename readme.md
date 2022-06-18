@@ -10,7 +10,7 @@ Projeto baseado no setup para Docker disponível em https://github.com/devianton
 1. [O arquivo Filebeat.yml](#o-arquivo-filebeat.yml)
 1. [Criar visualização de dados no Kibana](#criar-visualização-de-dados-no-Kibana)
 1. [Observabilidade com Elastic APM](#observabilidade-com-elastic-apm)
-    * [Elastic APM + Java](elastic-apm--java)
+    * [Elastic APM + Java](#elastic-apm--java)
 
 ## Antes de executar
 O arquivo .env contém as variáveis responsáveis por padronizar a instalação da Elastic Stack, são elas:
