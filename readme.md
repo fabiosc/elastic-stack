@@ -9,6 +9,8 @@ Projeto baseado no setup para Docker disponível em https://github.com/devianton
     * [Acessando o Kibana](#acessando-o-kibana)
 1. [O arquivo Filebeat.yml](#o-arquivo-filebeat.yml)
 1. [Criar visualização de dados no Kibana](#criar-visualização-de-dados-no-Kibana)
+1. [Observabilidade com Elastic APM](#observabilidade-com-elastic-apm)
+    * [Elastic APM + Java](elastic-apm-+-java)
 
 ## Antes de executar
 O arquivo .env contém as variáveis responsáveis por padronizar a instalação da Elastic Stack, são elas:
@@ -49,3 +51,38 @@ Para acessar o Kibana, basta acessar no browser a URL http://localhost:5601, o u
 * Dentro de Data View, clicar no botão "Create data view"
 * No campo "Name" definir o nome do Data View, por padrão ele deve iniciar com os mesmo nome do índice informado no arquivo filebeat.yml, no nosso exemplo, o nome será "produtos". Depois clicar no botão "Create data view" para confirmar a criação do Data View.
 * Depois é só acessar no Menuo a opção de " Analytics > Discover" para visualizar os dados coletados apartir do Filebeat.
+
+## Observabilidade com Elastic APM
+* Para ter uma aplicação Java monitorada pelo Elastic APM, além de subir o Elastic APM Server é necessário configurar um agente para coleta de métricas, o agente pode ser utilizado de forma externa a aplicação, ou como biblioteca na própria aplicação, ou ainda acionando as APIs do APM Server.
+* Documentação de observabilidade com Elastic Stack - https://www.elastic.co/guide/en/observability/current/index.html
+* Documentação dos agentes de APM - https://www.elastic.co/guide/en/apm/agent/index.html
+
+### Elastic APM + Java
+* Download do Elastic APM Agente externo para Java - https://search.maven.org/search?q=g:co.elastic.apm%20AND%20a:elastic-apm-agent
+* Para executar o agente junto com a aplicação execute o seguinte código: ```-javaagent:<CAMINHO_ELASTIC_APM_AGENT>elastic-apm-agent-<VERSAO>.jar -Delastic.apm.service_name=<NOME_SERVICO> -Delastic.apm.application_packages=<NOME_PACOTE>,<NOME_OUTRO_PACOTE>,...<NOMES_DEMAIS_PACOTES> -Delastic.apm.server_url=<URL_PORTA_APM_SERVER> -jar <ARQUIVO_APLICACAO.jar>```, exemplo:
+```
+-javaagent:d:/produtos/recursos/elastic-apm-agent-1.32.0 
+-Delastic.apm.service_name=produtos 
+-Delastic.apm.application_packages=br.com.produtos 
+-Delastic.apm.server_url=http://localhost:8200
+-jar produtos-1.0.0.jar
+```
+**onde:**
+- ```d:/produtos/recursos/elastic-apm-agent-1.32.0``` é o caminho onde encontra-se a biblioteca do agente
+- ```produtos ``` é o nome do serviço/aplicação e é esse nome que será exibido no kibana para visualização das estatistícas
+- ```br.com.produtos``` é o nome do pacote onde serão coletadas métricas, é possível especificar mais pacotes separando-os por "," (vírgula)
+- ```http://localhost:8200``` é a url (e porta) do APM Server 
+- ```produtos-1.0.0.jar``` é arquivo contendo a aplicação compilada/empacotada para execução
+
+**No eclipse é possível executar o agente Java na aba de execução e informar o seguinte comando**
+```
+-javaagent:d:/produtos/recursos/elastic-apm-agent-1.32.0 
+-Delastic.apm.service_name=produtos 
+-Delastic.apm.application_packages=br.com.produtos 
+-Delastic.apm.server_url=http://localhost:8200
+```
+
+* Para que os dados sejam exibidos no Kibana é necessário ir até a sessão  "Management > Integrations > Elastic APM > Elastic APM in Fleet > APM Integration > Add Elastic APM" e adicionar uma integração para o APM funcionar e passar a exibir as métricas da aplicação
+* Depois configurar integração com, configurações de integração, configurações do APM Server, configurações de TLS, ..., criar politícas do agente (agent policy)
+
+* Após tudo configurado, pode-se verificar as métricas em "Observability > APM > Services"
