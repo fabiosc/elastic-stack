@@ -111,23 +111,23 @@ services:
 
 #--DESABILITADO
 #--No nivel gratuito nao permite o envio de e-mail ou integracoes com slack, teams e outros
-  apm-server:
-    build:
-      context: apm-server/
-      args:
-        ELASTIC_VERSION: ${ELASTIC_VERSION}
-    command:
-      - --strict.perms=false
-    volumes:
-      - ./apm-server/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro,Z
-    ports:
-      - '8200:8200'
-    environment:
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-    networks:
-      - elk
-    depends_on:
-      - elasticsearch
+#  apm-server:
+#    build:
+#      context: apm-server/
+#      args:
+#        ELASTIC_VERSION: ${ELASTIC_VERSION}
+#    command:
+#      - --strict.perms=false
+#    volumes:
+#      - ./apm-server/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro,Z
+#    ports:
+#      - '8200:8200'
+#    environment:
+#      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+#    networks:
+#      - elk
+#    depends_on:
+#      - elasticsearch
       
 networks:
   elk:
