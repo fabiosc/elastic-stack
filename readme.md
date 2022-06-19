@@ -53,6 +53,7 @@ Para acessar o Kibana, basta acessar no browser a URL http://localhost:5601, o u
 * Depois é só acessar no Menuo a opção de " Analytics > Discover" para visualizar os dados coletados apartir do Filebeat.
 
 ## Observabilidade com Elastic APM
+### DESABILITADO EM AMBIENTE PRODUTIVO POR CONTA DO NIVEL GRATUITO NAO ENVIAR ALERTAR POS E-MAIL OU SLACK OU TEAMS
 * Para ter uma aplicação Java monitorada pelo Elastic APM, além de subir o Elastic APM Server é necessário configurar um agente para coleta de métricas, o agente pode ser utilizado de forma externa a aplicação, ou como biblioteca na própria aplicação, ou ainda acionando as APIs do APM Server.
 * Documentação de observabilidade com Elastic Stack - https://www.elastic.co/guide/en/observability/current/index.html
 * Documentação dos agentes de APM - https://www.elastic.co/guide/en/apm/agent/index.html
