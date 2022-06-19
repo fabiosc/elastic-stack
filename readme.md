@@ -9,7 +9,7 @@ Projeto baseado no setup para Docker disponível em https://github.com/devianton
     * [Acessando o Kibana](#acessando-o-kibana)
 1. [O arquivo Filebeat.yml](#o-arquivo-filebeat.yml)
 1. [Criar visualização de dados no Kibana](#criar-visualização-de-dados-no-Kibana)
-1. [Observabilidade com Elastic APM](#observabilidade-com-elastic-apm)
+1. [Observabilidade com Elastic APM - DESABILITADO](#observabilidade-com-elastic-apm---desabilitado) 
     * [Elastic APM + Java](#elastic-apm--java)
 
 ## Antes de executar
